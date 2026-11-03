@@ -1,0 +1,27 @@
+[project]
+name = "fastapi-authentication"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "praveenkannan253", email = "praveenkannan253@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "alembic>=1.20.1",
+    "email-validator>=2.3.0",
+    "fastapi>=0.143.0",
+    "psycopg[binary]>=3.3.7",
+    "pwdlib[argon2]>=0.3.1",
+    "pydantic-settings>=2.15.0",
+    "python-dotenv>=1.2.4",
+    "sqlalchemy>=2.1.6",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+fastapi-authentication = "fastapi_authentication:main"
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"

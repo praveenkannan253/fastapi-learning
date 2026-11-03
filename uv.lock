@@ -2,6 +2,12 @@ version = 1
 revision = 5
 requires-python = ">=3.14"
 
+[manifest]
+members = [
+    "fastapi-authentication",
+    "fastapi-learning",
+]
+
 [[package]]
 name = "agent-detector"
 version = "2.0.0"
@@ -233,6 +239,25 @@ standard = [
     { name = "pydantic-settings" },
     { name = "python-multipart" },
     { name = "uvicorn", extra = ["standard"] },
+]
+
+[[package]]
+name = "fastapi-authentication"
+version = "0.1.0"
+source = { editable = "FastAPI Authentication" }
+dependencies = [
+    { name = "fastapi" },
+    { name = "pydantic-settings" },
+    { name = "python-dotenv" },
+    { name = "uvicorn", extra = ["standard"] },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "fastapi", specifier = ">=0.143.0" },
+    { name = "pydantic-settings", specifier = ">=2.15.0" },
+    { name = "python-dotenv", specifier = ">=1.2.4" },
+    { name = "uvicorn", extras = ["standard"], specifier = ">=0.54.0" },
 ]
 
 [[package]]
