@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from app.schemas.user import UserCreate,UserResponse
 from app.core.security import hash_password
+from app.core.dependencies import get_db
 
 router=APIRouter(prefix="/auth",tags=["Authentication"])
 
