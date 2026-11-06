@@ -1,10 +1,11 @@
 from fastapi import APIRouter,Depends,HTTPException
 from sqlalchemy.orm import Session
 from app.schemas.user import UserCreate,UserResponse,UserLogin
-from app.core.security import hash_password,verify_password
+from app.core.security import hash_password,verify_password,create_access_token
 from app.core.dependencies import get_db
 from app.models.user import User
 from sqlalchemy.exc import IntegrityError
+from app.schemas.token import Token
 
 router=APIRouter(prefix="/auth",tags=["Authentication"])
 
@@ -52,7 +53,7 @@ def register_user(user:UserCreate,db:Session=Depends(get_db)):
 
     return new_user
 
-@router.post("/login")
+@router.post("/login",response_model=Token)
 def login(credentials:UserLogin,db:Session=Depends(get_db)):
 
     user=db.query(User).filter(
@@ -68,7 +69,9 @@ def login(credentials:UserLogin,db:Session=Depends(get_db)):
             detail="Invalid credentials"
         )
 
+    access_token=create_access_token(user_id=str(user.id))
+    
     return{
-        "message":"Login Successful",
-        "username":user.username
+        "access_token":access_token,
+        "token_type":"bearer"
     }
